@@ -54,5 +54,68 @@ console.log(sum(1, 2)); // Output: 3
 
 <hr>
 </html>
+ <h1>Chapter # 2 => WEB SERVER USING HTTP</h1>
+
+## WEB SERVERS
+
+In the client-server architecture, clients request data from servers, and servers respond with the requested information. Let's delve into how these two entities communicate with each other:
+
+### FIRStLY:
+
+Firstly, take a look at the notes in the folder to understand what goes into a packet when a request and response are made.
+
+### SECONDLY:
+
+Open a browser and type `google.com`, then observe the network traffic from the browser's inspect tool.
+
+### LASTLY:
+
+Complete the assignments.
+
+HTTP is a module that helps create a server.
+
+// index.js
+<code>
+const http = require("http");
+http.createServer((req, res) => {
+  console.log("Server running");
+  res.end("<h1>CHal Gya hu </h1>");
+}).listen(1231);
+</code>
+
+<p>We can also send complete files, but first, we have to read them using fs. When setting req.url, which is the URL for searching in a Chrome tab, we can determine which file to serve, whether it's HTML or an application/json file.
+
+For example, if we have an array of 30 products, each with a unique ID, we can use that ID to view each product's data dynamically on the webpage. To do this:</p>
+<code>
+// index.js
+const index = fs.readFileSync("./index.html", "utf-8");
+const data = JSON.parse(fs.readFileSync("./data.json", "utf-8"));
+const products = data.products;
+
+http.createServer((req, res) => {
+  console.log("Server running");
+  if (req.url.startsWith("/products/")) {
+    const id = req.url.split("/")[2];
+    const product = products.find((p) => p.id === +id);
+    res.setHeader("Content-Type", "text/html");
+    res.end(product.title);
+    return;
+  }
+  switch (req.url) {
+    case "/":
+      res.setHeader("Content-Type", "text/html");
+      res.end(index);
+      break;
+    case "/products":
+      res.setHeader("Content-Type", "text/html");
+      res.end(products.title);
+      break;
+    default:
+      break;
+  }
+}).listen(1231);
+
+</code>
+
 
 
