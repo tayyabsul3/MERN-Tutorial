@@ -122,4 +122,79 @@ http.createServer((req, res) => {
 </code>
 
 
+     <h1>Chapter # 3 => EXPRESS JS Crash Course</h1>
+
+    <h2>EXPRESS JS:</h2>
+
+    <p><strong>How to Create a Basic Server in Express:</strong></p>
+
+    <pre><code>const express = require('express');
+const server = express();
+
+server.listen(3210, () => {
+    console.log("Server is running");
+});</code></pre>
+
+    <p><strong>METHODS:</strong></p>
+
+    <p>We can use get and post and every other method on a single path in express easily using built-in functions.</p>
+
+    <p><strong>How can We create simple APIs/endpoints/routes:</strong></p>
+
+    <pre><code>server.get("/", (req, res) => {
+    res.send({ "type": "GET" });
+});</code></pre>
+
+    <p><strong>MIDDLEWARE: How Can we use Middleware and What is Its Purpose:</strong></p>
+
+    <p><strong>Global Middleware:</strong></p>
+
+    <pre><code>server.use((req, res, next) => {
+    if (req.query.password == "123") {
+        next();
+    } else {
+        res.send("unauthorized");
+    }
+});</code></pre>
+
+    <p><strong>Router-level Middleware:</strong></p>
+
+    <pre><code>server.post("/", (req, res, next) => {
+    if (req.query.password == "123") {
+        next();
+    } else {
+        res.send("unauthorized");
+    }
+}, (req, res) => {
+    res.json({ type: "POST" });
+});</code></pre>
+
+    <p><strong>Three Ways to Get Data From:</strong></p>
+
+    <ol>
+        <li>Req.body: in this method we have to use a parser and pass some data in the body.</li>
+        <li>Req.params: /:id it is of this type and we can access it using req.params.</li>
+        <li>Req.query: ?password=123 it is of this type in the URL and to access it we use req.query.</li>
+    </ol>
+
+    <p><strong>Built-in Middleware:</strong></p>
+
+    <pre><code>server.use(express.json());
+server.use(express.urlencoded());</code></pre>
+
+    <p><strong>Static Middleware:</strong></p>
+
+    <pre><code>server.use(express.static("public"));</code></pre>
+
+    <p><strong>Third-Party Middleware:</strong></p>
+
+    <p>Use Morgan if you want to log details of the webpage on the server.</p>
+
+    <p><strong>Conclusion:</strong></p>
+
+    <p>Middleware sits in the middle of the request where we can either manipulate the request, accept it, or deny it. Basically, it gives us control over the request so that we can use it to make our applications more secure and optimized.</p>
+
+
+
+
 
