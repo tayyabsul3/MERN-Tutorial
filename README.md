@@ -74,20 +74,22 @@ Complete the assignments.
 
 HTTP is a module that helps create a server.
 
-// index.js
-<code>
+<pre><code>// index.js
+
 const http = require("http");
 http.createServer((req, res) => {
   console.log("Server running");
-  res.end("<h1>CHal Gya hu </h1>");
+  res.end("ok");
 }).listen(1231);
-</code>
+
+</code></pre>
+
 
 <p>We can also send complete files, but first, we have to read them using fs. When setting req.url, which is the URL for searching in a Chrome tab, we can determine which file to serve, whether it's HTML or an application/json file.
 
 For example, if we have an array of 30 products, each with a unique ID, we can use that ID to view each product's data dynamically on the webpage. To do this:</p>
-<code>
-// index.js
+<pre><code>
+ // index.js
 const index = fs.readFileSync("./index.html", "utf-8");
 const data = JSON.parse(fs.readFileSync("./data.json", "utf-8"));
 const products = data.products;
@@ -114,6 +116,8 @@ http.createServer((req, res) => {
       break;
   }
 }).listen(1231);
+</code></pre>
+
 
 </code>
 
